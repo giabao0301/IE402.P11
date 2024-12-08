@@ -9,6 +9,10 @@ import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
+import ContactPage from "./routes/contactPage/contactPage";
+import AboutPage from "./routes/aboutPage/aboutPage"
+import apiRequest from "./lib/apiRequest";
+import AgentsPage from"./routes/agentsPage/agentsPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +43,18 @@ function App() {
           path: "/register",
           element: <Register />,
         },
+        {
+          path: "/contact",
+          element: <ContactPage />
+        },
+        {
+          path: "/about",
+          element: <AboutPage />
+        },
+        {
+          path: "/agents",
+          element: <AgentsPage />
+        }
       ],
     },
     {
@@ -61,6 +77,15 @@ function App() {
       ],
     },
   ]);
+
+  const handleSubmit = async (formData) => {
+    try {
+      const response = await apiRequest.post("/contact", formData);
+      // Handle success
+    } catch (error) {
+      // Handle error
+    }
+  };
 
   return <RouterProvider router={router} />;
 }
